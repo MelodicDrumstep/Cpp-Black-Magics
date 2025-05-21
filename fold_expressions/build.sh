@@ -1,0 +1,1 @@
+g++ -std=c++17 -o fold_traverse fold_traverse.cpp

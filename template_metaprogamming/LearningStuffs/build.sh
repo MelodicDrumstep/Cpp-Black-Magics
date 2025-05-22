@@ -1,0 +1,1 @@
+g++ -std=c++20 -O3 -o compile_correctness_test compile_correctness_test.cpp

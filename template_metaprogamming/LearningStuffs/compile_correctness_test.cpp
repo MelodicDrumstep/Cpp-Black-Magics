@@ -33,6 +33,10 @@ int main() {
     static_assert(five() == 5);             // Check the call operator
     static_assert(static_cast<int>(five) == 5); // Check the type conversion operator
 
+    static_assert(std::is_same<int, metaprog::RetrieveElementType_t<std::array<int, 5>>>{});
+    static_assert(std::is_same<int, metaprog::RetrieveElementType_t<std::vector<int>>>{});
+    static_assert(std::is_same<int, metaprog::RetrieveElementType_t<int[5]>>{});
+
     // If all assertions pass, print a success message
     std::cout << "All tests passed!" << std::endl;
     return 0;

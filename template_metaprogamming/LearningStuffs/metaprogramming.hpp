@@ -366,4 +366,25 @@ static_assert(std::is_same<
     std::tuple<char, int, unsigned int, double>,
     Sorted>{});
 
+template <typename T>
+struct RetrieveElementType;
+
+template <typename T, std::size_t N>
+struct RetrieveElementType<std::array<T, N>> {
+    using type = T;
+};
+
+template <typename T>
+struct RetrieveElementType<std::vector<T>> {
+    using type = T;
+};
+
+template <typename T, std::size_t N>
+struct RetrieveElementType<T[N]> {
+    using type = T;
+};
+
+template <typename T>
+using RetrieveElementType_t = typename RetrieveElementType<T>::type;
+
 }

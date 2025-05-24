@@ -118,6 +118,33 @@ using RemoveCV_t = typename RemoveCV<T>::type;
 
 static_assert(std::is_same<int, RemoveCV_t<int const volatile>>{});
 
+template <typename T>
+struct Decay : RemoveCV<T> {};
+
+template <typename T>
+struct Decay<T []> {
+    using type = T *;
+};
+
+template <typename T, std::size_t N>
+struct Decay<T[N]> {
+    using type = T *;
+};
+
+template <typename R, typename ... Args>
+struct Decay<R(Args...)> {
+    using type = R(*)(Args...);
+};
+ 
+// Dealing with the C-style varargs
+template <typename R, typename ... Args>
+struct Decay<R(Args..., ...)> {
+    using type = R(*)(Args..., ...);
+};
+
+template <typename T>
+using Decay_t = typename Decay<T>::type;
+
 /* Condition */
 template <bool Condition, typename T, typename F>
 struct Conditional : TypeIdentity<T> {};

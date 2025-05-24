@@ -37,6 +37,11 @@ int main() {
     static_assert(std::is_same<int, metaprog::RetrieveElementType_t<std::vector<int>>>{});
     static_assert(std::is_same<int, metaprog::RetrieveElementType_t<int[5]>>{});
 
+    static_assert(std::is_same<int, metaprog::Decay_t<int>>{});
+    static_assert(std::is_same<int *, metaprog::Decay_t<int[]>>{});
+    static_assert(std::is_same<int *, metaprog::Decay_t<int[5]>>{});
+    static_assert(std::is_same<int(*)(int), metaprog::Decay_t<int(int)>>{});
+
     // If all assertions pass, print a success message
     std::cout << "All tests passed!" << std::endl;
     return 0;
